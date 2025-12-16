@@ -5,25 +5,22 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-val abis = setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-
 android {
     namespace = "io.github.dovecoteescapee.byedpi"
     compileSdk = 36
+    buildToolsVersion = "36.0.0"
+    ndkVersion = "27.3.13750724"
 
     defaultConfig {
         applicationId = "io.github.romanvht.byedpi"
-        minSdk = 21
-        //noinspection OldTargetApi
-        targetSdk = 34
+        minSdk = 31
+        targetSdk = 36
         versionCode = 1680
         versionName = "1.6.8"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
         ndk {
-            abiFilters.addAll(abis)
-        }
+			abiFilters += "arm64-v8a"
+		}
     }
 
     buildFeatures {
@@ -42,20 +39,14 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_1_8)
-        }
-    }
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
 
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")
-            version = "3.22.1"
+            version = "4.2.1"
         }
     }
 
@@ -69,15 +60,6 @@ android {
         includeInApk = false
         // Disables dependency metadata when building Android App Bundles.
         includeInBundle = false
-    }
-
-    splits {
-        abi {
-            isEnable = true
-            reset()
-            include(*abis.toTypedArray())
-            isUniversalApk = true
-        }
     }
 }
 

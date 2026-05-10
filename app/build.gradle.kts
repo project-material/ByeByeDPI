@@ -10,6 +10,8 @@ val abis = setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
 android {
     namespace = "io.github.romanvht.byedpi"
     compileSdk = 36
+    buildToolsVersion = "36.0.0"
+    ndkVersion = "27.3.13750724"
 
     defaultConfig {
         applicationId = "io.github.romanvht.byedpi"
@@ -44,14 +46,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_1_8)
-        }
+        sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
     }
 
     externalNativeBuild {
